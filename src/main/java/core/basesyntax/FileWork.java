@@ -1,42 +1,47 @@
 package core.basesyntax;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Arrays;
 
 public class FileWork {
     public String[] readFromFile(String fileName) {
-        StringBuilder content = new StringBuilder();
+        StringBuilder builder = new StringBuilder();
 
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                content.append(line).append(" ");
+            String line = reader.readLine();
+            while (line != null) {
+                builder.append(line).append(" ");
+                line = reader.readLine();
             }
         } catch (IOException e) {
             throw new RuntimeException("Can't read from file", e);
         }
 
-        String[] split = content.toString().split("[^a-zA-Z]+");
+        String[] splitValues = builder.toString().toLowerCase().split("[^a-zA-Z]+");
 
         int count = 0;
-        for (String s : split) {
-            if (!s.isEmpty() && s.toLowerCase().startsWith("w")) {
+        for (String word : splitValues) {
+            if (word.startsWith("w")) {
                 count++;
             }
         }
 
-        String[] result = new String[count];
+        String[] arrayToRead = new String[count];
+
         int index = 0;
-        for (String s : split) {
-            if (!s.isEmpty() && s.toLowerCase().startsWith("w")) {
-                result[index++] = s.toLowerCase();
+        for (String word : splitValues) {
+            if (word.startsWith("w")) {
+                arrayToRead[index++] = word;
             }
         }
 
-        Arrays.sort(result);
+        Arrays.sort(arrayToRead);
 
-        return result;
+        return arrayToRead;
     }
 }
+
 
 
