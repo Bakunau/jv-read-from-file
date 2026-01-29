@@ -19,18 +19,16 @@ public class FileWork {
         String[] split = content.toString().split("[^a-zA-Z]+");
 
         int count = 0;
-        for (int i = 0; i < split.length; i++) {
-            String s = split[i];
-            if (s.length() > 0 && s.toLowerCase().startsWith("w")) {
+        for (String s : split) {
+            if (!s.isEmpty() && s.toLowerCase().startsWith("w")) {
                 count++;
             }
         }
 
         String[] result = new String[count];
         int index = 0;
-        for (int i = 0; i < split.length; i++) {
-            String s = split[i];
-            if (s.length() > 0 && s.toLowerCase().startsWith("w")) {
+        for (String s : split) {
+            if (!s.isEmpty() && s.toLowerCase().startsWith("w")) {
                 result[index++] = s.toLowerCase();
             }
         }
