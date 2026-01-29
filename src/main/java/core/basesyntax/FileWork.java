@@ -1,6 +1,7 @@
 package core.basesyntax;
 
 import java.io.*;
+import java.util.Arrays;
 
 public class FileWork {
     public String[] readFromFile(String fileName) {
@@ -33,6 +34,8 @@ public class FileWork {
                 result[index++] = s.toLowerCase();
             }
         }
+
+        Arrays.sort(result);
 
         return result;
     }
