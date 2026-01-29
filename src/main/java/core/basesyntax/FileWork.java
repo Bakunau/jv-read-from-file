@@ -16,7 +16,7 @@ public class FileWork {
             throw new RuntimeException("Can't read from file", e);
         }
 
-        String[] split = builder.toString().split("\\W+");
+        String[] split = builder.toString().split("[^a-zA-Z]+");
 
         int count = 0;
         for (String s : split) {
